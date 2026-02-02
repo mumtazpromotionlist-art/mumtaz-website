@@ -72,4 +72,5 @@ window.addEventListener('click', (e) => {
     }
 });
 loadOffers();
+
 });
