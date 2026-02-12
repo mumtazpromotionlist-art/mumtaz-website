@@ -1,0 +1,18 @@
+# Node
+node_modules/
+
+# Env
+.env
+admin/.env
+server/.env
+
+# DB and uploads
+server/data/
+uploads/
+backups/
+
+# Build outputs
+admin/dist/
+
+# Logs
+*.log
