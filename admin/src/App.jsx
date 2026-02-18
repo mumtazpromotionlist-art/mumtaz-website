@@ -36,7 +36,8 @@ function App() {
   const [success, setSuccess] = useState('')
   const [form, setForm] = useState(emptyForm)
   const [login, setLogin] = useState({ username: '', password: '' })
-
+  const [fileInputKey, setFileInputKey] = useState(0)
+  
   const authHeaders = useMemo(() => (
     token ? { Authorization: `Bearer ${token}` } : {}
   ), [token])
@@ -105,6 +106,7 @@ function App() {
 
   function resetForm() {
     setForm(emptyForm)
+    setFileInputKey((prev) => prev + 1)
   }
 
   function startEdit(offer) {
@@ -277,7 +279,7 @@ function App() {
             <h2>Offers</h2>
             <button className="ghost" onClick={loadOffers}>Refresh</button>
           </div>
-          {loading && <div className="muted">Loading…</div>}
+          {loading && <div className="muted">Loadingâ€¦</div>}
           {error && <div className="alert error">{error}</div>}
           {success && <div className="alert success">{success}</div>}
           <div className="offer-list">
@@ -368,15 +370,16 @@ function App() {
                 />
               </label>
             </div>
-            <div className="split">
+            <div className="file-stack">
               <label>
                 Thumbnail
                 <input
                   type="file"
                   accept="image/*"
+                  key={`pdf-${fileInputKey}`}
                   onChange={(e) => uploadFile(e.target.files?.[0], 'thumbnail').catch((err) => setError(err.message))}
                 />
-                {form.thumbnailPath && <span className="muted">{form.thumbnailPath}</span>}
+                {form.pdfPath && <span className="primary">{form.id ? 'Save Changes' : 'Create Offer'}</span>}
               </label>
               <label>
                 Offer PDF
