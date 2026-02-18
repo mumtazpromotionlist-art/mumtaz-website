@@ -221,7 +221,8 @@ body {
 .offer-files img {
   width: 72px;
   height: 72px;
-  object-fit: cover;
+  object-fit: contain;
+  background: #fff;
   border-radius: 12px;
   border: 1px solid var(--border);
 }
@@ -267,6 +268,20 @@ body {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+}
+
+.offer-form .file-stack {
+  display: grid;
+  grid-template-columns: repeat(2, minimax(0, 1fr));
+  gap: 12px;
+}
+
+.offer-form .file-path{
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 button.primary {
