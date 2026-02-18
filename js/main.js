@@ -84,6 +84,7 @@
             } else {
                 body.classList.remove("dark-mode");
             }
+            applySidebarBg(isDark);
             updateToggleButton();
         }
 
@@ -110,7 +111,7 @@
                 header.style.boxShadow = "0 5px 20px rgba(0, 0, 0, 0.1)";
                 header.style.background = "rgba(255, 255, 255, 0.95)";
             } else {
-                header.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
+                header.style.boxShadow = "0 2px 10px rgba(250, 249, 249, 0.1)";
                 header.style.background = "var(--white)";
             }
         });
