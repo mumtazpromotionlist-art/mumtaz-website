@@ -35,6 +35,36 @@
         // Dark/Light Mode Toggle
         const darkModeToggle = document.getElementById("darkModeToggle");
         const body = document.body;
+        const sectionBgTargets = document.querySelectorAll("[data-bg-dark"]);
+        const sidebar = document.querySelector(".social-sidebar");
+        let currentSectionBg = (sectionBgTargets[0] && sectionBgTargets[0].dataset.bgDark) || "default";
+
+        function applySidebarBg(isDark){
+                if(!sidebar) return;
+                body.classList.remove("sidebar-bg-light", "sidebar-bg-default");
+                if(!isDark) return;
+                const inverted = currentSectionBg == "default" ? "light" : "default";
+                body.classList.add(inverted === "light" ? "sidebar-bg-light" : "sidebar-bg-default");
+        }
+
+        if(sectionBgTargets.length){
+                const observer = new IntersectionObserver (
+                        (entries) => {
+                                entries.forEach((entry) => {
+                                        if (entry.isIntersecting) {
+                                                currentSectionBg = entry.target.dataset.bgDark || "default";
+                                                applySidebarBg(body.classList.contains("dark-mode"));
+                                        }
+                                });
+                        },
+                        {
+                                rootMargin:"-40% 0px -50% 0px",
+                                threshold: 0.01,
+                        }
+                );
+
+                sectionBgTargets.forEach((section) => observer.observe(section));
+        }
         function updateToggleButton() {
             const icon = darkModeToggle.querySelector("i");
             if(document.body.classList.contains("dark-mode")) {
